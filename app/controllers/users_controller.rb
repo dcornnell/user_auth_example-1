@@ -14,6 +14,16 @@ class UsersController < ApplicationController
 		end
 	end
 
+	def search
+		@search = params[:search]
+		@response_user = HTTParty.get("https://openapi.etsy.com/v2/users?keywords=#{@search["search"]}&limit=#{@search["number"]}&api_key=#{Rails.application.secrets.etsy_api_key}")
+		@user = @response_user["results"]
+		puts '___________________________'
+		puts @search["search"]
+		puts @user
+		render :index 
+	end
+
 	private
 
 	def user_params

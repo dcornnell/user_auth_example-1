@@ -1,0 +1,10 @@
+= form_tag search_users_path, method: "get" do
+	= label_tag "search tasks"
+	= text_field_tag "search[search]"
+	= select_tag "search[number]", options_for_select([[1,1],[10,10],[50,50],[100,100]])
+	= submit_tag "search!"
+-if @user.present?
+	-@user.each do |u|
+		=link_to "#{u["login_name"]}", "http://www.etsy.com/people/#{u["login_name"]}?ref=owner_profile_leftnav"
+
+		%br
